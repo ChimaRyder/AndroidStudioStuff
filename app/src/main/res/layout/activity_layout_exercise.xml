@@ -1,0 +1,807 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/story_name"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LayoutExercise">
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigationView"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imageView7"
+                android:layout_width="192dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/logo_instagram" />
+
+            <Space
+                android:layout_width="278dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <ImageButton
+                android:id="@+id/Navbar_messenger"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="#00FFFFFF"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/messenger" />
+
+            <ImageButton
+                android:id="@+id/Navbar_heart"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="#00FFFFFF"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/heart" />
+
+        </LinearLayout>
+
+    </com.google.android.material.navigation.NavigationView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/navigationView">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp" />
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:id="@+id/story"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/imageView9"
+                                android:layout_width="78dp"
+                                android:layout_height="54dp"
+                                android:scaleType="fitCenter"
+                                app:srcCompat="@drawable/human" />
+
+                            <TextView
+                                android:id="@+id/textView"
+                                android:layout_width="match_parent"
+                                android:layout_height="14dp"
+                                android:fontFamily="sans-serif-medium"
+                                android:text="Angel"
+                                android:textAlignment="center"
+                                android:textSize="10sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/story"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/imageView9"
+                                android:layout_width="78dp"
+                                android:layout_height="54dp"
+                                android:scaleType="fitCenter"
+                                app:srcCompat="@drawable/man" />
+
+                            <TextView
+                                android:id="@+id/textView"
+                                android:layout_width="match_parent"
+                                android:layout_height="14dp"
+                                android:fontFamily="sans-serif-medium"
+                                android:text="Bobby"
+                                android:textAlignment="center"
+                                android:textSize="10sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/story"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/imageView9"
+                                android:layout_width="78dp"
+                                android:layout_height="54dp"
+                                android:scaleType="fitCenter"
+                                app:srcCompat="@drawable/man" />
+
+                            <TextView
+                                android:id="@+id/textView"
+                                android:layout_width="match_parent"
+                                android:layout_height="14dp"
+                                android:fontFamily="sans-serif-medium"
+                                android:text="Max"
+                                android:textAlignment="center"
+                                android:textSize="10sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/story"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/imageView9"
+                                android:layout_width="78dp"
+                                android:layout_height="54dp"
+                                android:scaleType="fitCenter"
+                                app:srcCompat="@drawable/human" />
+
+                            <TextView
+                                android:id="@+id/textView"
+                                android:layout_width="match_parent"
+                                android:layout_height="14dp"
+                                android:fontFamily="sans-serif-medium"
+                                android:text="Liah"
+                                android:textAlignment="center"
+                                android:textSize="10sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/story"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/imageView9"
+                                android:layout_width="78dp"
+                                android:layout_height="54dp"
+                                android:scaleType="fitCenter"
+                                app:srcCompat="@drawable/human" />
+
+                            <TextView
+                                android:id="@+id/textView"
+                                android:layout_width="match_parent"
+                                android:layout_height="14dp"
+                                android:fontFamily="sans-serif-medium"
+                                android:text="Meg"
+                                android:textAlignment="center"
+                                android:textSize="10sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/story"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/imageView9"
+                                android:layout_width="78dp"
+                                android:layout_height="54dp"
+                                android:scaleType="fitCenter"
+                                app:srcCompat="@drawable/man" />
+
+                            <TextView
+                                android:id="@+id/textView"
+                                android:layout_width="match_parent"
+                                android:layout_height="14dp"
+                                android:fontFamily="sans-serif-medium"
+                                android:text="Peter"
+                                android:textAlignment="center"
+                                android:textSize="10sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/story"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/imageView9"
+                                android:layout_width="78dp"
+                                android:layout_height="54dp"
+                                android:scaleType="fitCenter"
+                                app:srcCompat="@drawable/human" />
+
+                            <TextView
+                                android:id="@+id/textView"
+                                android:layout_width="match_parent"
+                                android:layout_height="14dp"
+                                android:fontFamily="sans-serif-medium"
+                                android:text="Mary"
+                                android:textAlignment="center"
+                                android:textSize="10sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/story"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/imageView9"
+                                android:layout_width="78dp"
+                                android:layout_height="54dp"
+                                android:scaleType="fitCenter"
+                                app:srcCompat="@drawable/man" />
+
+                            <TextView
+                                android:id="@+id/textView"
+                                android:layout_width="match_parent"
+                                android:layout_height="14dp"
+                                android:fontFamily="sans-serif-medium"
+                                android:text="Brian"
+                                android:textAlignment="center"
+                                android:textSize="10sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/story"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/imageView9"
+                                android:layout_width="78dp"
+                                android:layout_height="54dp"
+                                android:scaleType="fitCenter"
+                                app:srcCompat="@drawable/human" />
+
+                            <TextView
+                                android:id="@+id/textView"
+                                android:layout_width="match_parent"
+                                android:layout_height="14dp"
+                                android:fontFamily="sans-serif-medium"
+                                android:text="Lily"
+                                android:textAlignment="center"
+                                android:textSize="10sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/story"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/imageView9"
+                                android:layout_width="78dp"
+                                android:layout_height="54dp"
+                                android:scaleType="fitCenter"
+                                app:srcCompat="@drawable/man" />
+
+                            <TextView
+                                android:id="@+id/textView"
+                                android:layout_width="match_parent"
+                                android:layout_height="14dp"
+                                android:fontFamily="sans-serif-medium"
+                                android:text="Mike"
+                                android:textAlignment="center"
+                                android:textSize="10sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/story"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/imageView9"
+                                android:layout_width="78dp"
+                                android:layout_height="54dp"
+                                android:scaleType="fitCenter"
+                                app:srcCompat="@drawable/human" />
+
+                            <TextView
+                                android:id="@+id/textView"
+                                android:layout_width="match_parent"
+                                android:layout_height="14dp"
+                                android:fontFamily="sans-serif-medium"
+                                android:text="Jane"
+                                android:textAlignment="center"
+                                android:textSize="10sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/story"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/imageView9"
+                                android:layout_width="78dp"
+                                android:layout_height="54dp"
+                                android:scaleType="fitCenter"
+                                app:srcCompat="@drawable/man" />
+
+                            <TextView
+                                android:id="@+id/textView"
+                                android:layout_width="match_parent"
+                                android:layout_height="14dp"
+                                android:fontFamily="sans-serif-medium"
+                                android:text="Andrew"
+                                android:textAlignment="center"
+                                android:textSize="10sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/story"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/imageView9"
+                                android:layout_width="78dp"
+                                android:layout_height="54dp"
+                                android:scaleType="fitCenter"
+                                app:srcCompat="@drawable/human" />
+
+                            <TextView
+                                android:id="@+id/textView"
+                                android:layout_width="match_parent"
+                                android:layout_height="14dp"
+                                android:fontFamily="sans-serif-medium"
+                                android:text="Ashley"
+                                android:textAlignment="center"
+                                android:textSize="10sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/story"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/imageView9"
+                                android:layout_width="78dp"
+                                android:layout_height="54dp"
+                                android:scaleType="fitCenter"
+                                app:srcCompat="@drawable/man" />
+
+                            <TextView
+                                android:id="@+id/textView"
+                                android:layout_width="match_parent"
+                                android:layout_height="14dp"
+                                android:fontFamily="sans-serif-medium"
+                                android:text="Francis"
+                                android:textAlignment="center"
+                                android:textSize="10sp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </HorizontalScrollView>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp" />
+
+                <LinearLayout
+                    android:id="@+id/igposts"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/post_avatar"
+                            android:layout_width="100dp"
+                            android:layout_height="29dp"
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/human" />
+
+                        <TextView
+                            android:id="@+id/textView2"
+                            android:layout_width="301dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:paddingTop="4dp"
+                            android:text="official_mary"
+                            android:textAlignment="center" />
+
+                        <ImageButton
+                            android:id="@+id/imageButton3"
+                            android:layout_width="100dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:backgroundTint="#00FFFFFF"
+                            android:scaleType="fitCenter"
+                            app:srcCompat="@drawable/dots" />
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/imageView12"
+                        android:layout_width="match_parent"
+                        android:layout_height="286dp"
+                        app:srcCompat="@drawable/girl_shibuya" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageButton
+                            android:id="@+id/imageButton4"
+                            android:layout_width="15dp"
+                            android:layout_height="50dp"
+                            android:layout_weight="1"
+                            android:backgroundTint="#00FFFFFF"
+                            android:scaleType="fitCenter"
+                            app:srcCompat="@drawable/heart" />
+
+                        <ImageButton
+                            android:id="@+id/imageButton5"
+                            android:layout_width="15dp"
+                            android:layout_height="50dp"
+                            android:layout_weight="1"
+                            android:backgroundTint="#00FFFFFF"
+                            android:scaleType="fitCenter"
+                            app:srcCompat="@drawable/messenger" />
+
+                        <ImageButton
+                            android:id="@+id/imageButton6"
+                            android:layout_width="15dp"
+                            android:layout_height="50dp"
+                            android:layout_weight="1"
+                            android:backgroundTint="#00FFFFFF"
+                            android:scaleType="fitCenter"
+                            app:srcCompat="@drawable/telegram" />
+
+                        <EditText
+                            android:id="@+id/editTextTextPersonName"
+                            android:layout_width="100dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:ems="10"
+                            android:hint="Add a Comment..."
+                            android:inputType="textPersonName" />
+
+                        <Space
+                            android:layout_width="2dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp" />
+
+                <LinearLayout
+                    android:id="@+id/igposts"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/post_avatar"
+                            android:layout_width="100dp"
+                            android:layout_height="29dp"
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/man" />
+
+                        <TextView
+                            android:id="@+id/textView2"
+                            android:layout_width="301dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:paddingTop="4dp"
+                            android:text="dandanyy"
+                            android:textAlignment="center" />
+
+                        <ImageButton
+                            android:id="@+id/imageButton3"
+                            android:layout_width="100dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:backgroundTint="#00FFFFFF"
+                            android:scaleType="fitCenter"
+                            app:srcCompat="@drawable/dots" />
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/imageView12"
+                        android:layout_width="match_parent"
+                        android:layout_height="286dp"
+                        app:srcCompat="@drawable/_1013557493_532568c8a8_b" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageButton
+                            android:id="@+id/imageButton4"
+                            android:layout_width="15dp"
+                            android:layout_height="50dp"
+                            android:layout_weight="1"
+                            android:backgroundTint="#00FFFFFF"
+                            android:scaleType="fitCenter"
+                            app:srcCompat="@drawable/heart" />
+
+                        <ImageButton
+                            android:id="@+id/imageButton5"
+                            android:layout_width="15dp"
+                            android:layout_height="50dp"
+                            android:layout_weight="1"
+                            android:backgroundTint="#00FFFFFF"
+                            android:scaleType="fitCenter"
+                            app:srcCompat="@drawable/messenger" />
+
+                        <ImageButton
+                            android:id="@+id/imageButton6"
+                            android:layout_width="15dp"
+                            android:layout_height="50dp"
+                            android:layout_weight="1"
+                            android:backgroundTint="#00FFFFFF"
+                            android:scaleType="fitCenter"
+                            app:srcCompat="@drawable/telegram" />
+
+                        <EditText
+                            android:id="@+id/editTextTextPersonName"
+                            android:layout_width="100dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:ems="10"
+                            android:hint="Add a Comment..."
+                            android:inputType="textPersonName" />
+
+                        <Space
+                            android:layout_width="2dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp" />
+
+                <LinearLayout
+                    android:id="@+id/igposts"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/post_avatar"
+                            android:layout_width="100dp"
+                            android:layout_height="29dp"
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/human" />
+
+                        <TextView
+                            android:id="@+id/textView2"
+                            android:layout_width="301dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:paddingTop="4dp"
+                            android:text="fortunasxx"
+                            android:textAlignment="center" />
+
+                        <ImageButton
+                            android:id="@+id/imageButton3"
+                            android:layout_width="100dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:backgroundTint="#00FFFFFF"
+                            android:scaleType="fitCenter"
+                            app:srcCompat="@drawable/dots" />
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/imageView12"
+                        android:layout_width="match_parent"
+                        android:layout_height="286dp"
+                        app:srcCompat="@drawable/girl_shibuya" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageButton
+                            android:id="@+id/imageButton4"
+                            android:layout_width="15dp"
+                            android:layout_height="50dp"
+                            android:layout_weight="1"
+                            android:backgroundTint="#00FFFFFF"
+                            android:scaleType="fitCenter"
+                            app:srcCompat="@drawable/heart" />
+
+                        <ImageButton
+                            android:id="@+id/imageButton5"
+                            android:layout_width="15dp"
+                            android:layout_height="50dp"
+                            android:layout_weight="1"
+                            android:backgroundTint="#00FFFFFF"
+                            android:scaleType="fitCenter"
+                            app:srcCompat="@drawable/messenger" />
+
+                        <ImageButton
+                            android:id="@+id/imageButton6"
+                            android:layout_width="15dp"
+                            android:layout_height="50dp"
+                            android:layout_weight="1"
+                            android:backgroundTint="#00FFFFFF"
+                            android:scaleType="fitCenter"
+                            app:srcCompat="@drawable/telegram" />
+
+                        <EditText
+                            android:id="@+id/editTextTextPersonName"
+                            android:layout_width="100dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:ems="10"
+                            android:hint="Add a Comment..."
+                            android:inputType="textPersonName" />
+
+                        <Space
+                            android:layout_width="2dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp" />
+
+                <LinearLayout
+                    android:id="@+id/igposts"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/post_avatar"
+                            android:layout_width="100dp"
+                            android:layout_height="29dp"
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/man" />
+
+                        <TextView
+                            android:id="@+id/textView2"
+                            android:layout_width="301dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:paddingTop="4dp"
+                            android:text="zxster"
+                            android:textAlignment="center" />
+
+                        <ImageButton
+                            android:id="@+id/imageButton3"
+                            android:layout_width="100dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:backgroundTint="#00FFFFFF"
+                            android:scaleType="fitCenter"
+                            app:srcCompat="@drawable/dots" />
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/imageView12"
+                        android:layout_width="match_parent"
+                        android:layout_height="286dp"
+                        app:srcCompat="@drawable/_1013557493_532568c8a8_b" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageButton
+                            android:id="@+id/imageButton4"
+                            android:layout_width="15dp"
+                            android:layout_height="50dp"
+                            android:layout_weight="1"
+                            android:backgroundTint="#00FFFFFF"
+                            android:scaleType="fitCenter"
+                            app:srcCompat="@drawable/heart" />
+
+                        <ImageButton
+                            android:id="@+id/imageButton5"
+                            android:layout_width="15dp"
+                            android:layout_height="50dp"
+                            android:layout_weight="1"
+                            android:backgroundTint="#00FFFFFF"
+                            android:scaleType="fitCenter"
+                            app:srcCompat="@drawable/messenger" />
+
+                        <ImageButton
+                            android:id="@+id/imageButton6"
+                            android:layout_width="15dp"
+                            android:layout_height="50dp"
+                            android:layout_weight="1"
+                            android:backgroundTint="#00FFFFFF"
+                            android:scaleType="fitCenter"
+                            app:srcCompat="@drawable/telegram" />
+
+                        <EditText
+                            android:id="@+id/editTextTextPersonName"
+                            android:layout_width="100dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:ems="10"
+                            android:hint="Add a Comment..."
+                            android:inputType="textPersonName" />
+
+                        <Space
+                            android:layout_width="2dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp" />
+
+            </LinearLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

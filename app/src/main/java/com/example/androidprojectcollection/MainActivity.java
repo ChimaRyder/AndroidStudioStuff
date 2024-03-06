@@ -10,6 +10,7 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity {
     Button layoutButton;
     Button buttonExercise;
+    Button calcbutton;
 
 
     @Override
@@ -35,6 +36,17 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(
                         MainActivity.this,
                         ButtonExercise.class);
+                startActivity(intent);
+            }
+        });
+
+        calcbutton = (Button) findViewById(R.id.button3);
+        calcbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(
+                        MainActivity.this,
+                        Calculator.class);
                 startActivity(intent);
             }
         });

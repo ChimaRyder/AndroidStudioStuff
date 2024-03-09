@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Queue;
 import java.util.Stack;
 
 public class Calculator extends AppCompatActivity {
@@ -33,8 +34,10 @@ public class Calculator extends AppCompatActivity {
     Button divide;
     Button equals;
     Button point;
-    boolean hasChanged = false;
 
+    int reference_to_last_num = 0;
+    boolean hasChanged = false;
+    Stack<String> calculation = new Stack<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +71,8 @@ public class Calculator extends AppCompatActivity {
         buttons.add(eight);
         buttons.add(nine);
 
+//        Stack<String> calculation = new Stack<>();
+
         for (Button b : buttons) {
             b.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -75,11 +80,27 @@ public class Calculator extends AppCompatActivity {
                     Button x = (Button) view;
                     String num = x.getText().toString();
 
-                    if (result.getText().equals("0") || !hasChanged){
+                    if (result.getText().equals("0")){
                         result.setText(num);
-                        hasChanged = true;
                     } else {
                         result.setText(result.getText() + num);
+                    }
+
+                    if (calculation.isEmpty() || hasChanged) {
+                        calculation.push(result.getText().toString().substring(reference_to_last_num, result.length())); //push the number to the stack first
+                        hasChanged = false;
+                    } else {
+                        calculation.pop();
+                        calculation.push(result.getText().toString().substring(reference_to_last_num, result.length())); //push the number to the stack first
+                    }
+
+                    String res = calculateSequence(((Stack<String>)calculation.clone()));
+
+
+                    if (isNotInteger(res)) {
+                        lastnum.setText("= " + Float.parseFloat(res));
+                    } else {
+                        lastnum.setText("= " + ((int) Float.parseFloat(res)));
                     }
                 }
             });
@@ -92,7 +113,7 @@ public class Calculator extends AppCompatActivity {
                 Button y = (Button) view;
                 String p = y.getText().toString();
 
-                if (!result.getText().toString().contains(".")){
+                if (!result.getText().toString().substring(reference_to_last_num, result.length()).contains(".")){
                     result.setText(result.getText() + p);
                 }
             }
@@ -109,11 +130,9 @@ public class Calculator extends AppCompatActivity {
         ops.add(subtract);
         ops.add(multiply);
         ops.add(divide);
-        ops.add(equals);
 
         lastnum = (TextView) findViewById(R.id.lastnum_textview);
 
-        Stack<String> calculation = new Stack<>();
         for (Button b : ops) {
             b.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -121,61 +140,224 @@ public class Calculator extends AppCompatActivity {
                     Button o = (Button) view;
                     String operator = o.getText().toString();
 
+                    System.out.println(calculation.isEmpty());
                     switch(operator) {
                         case "+":
-                            if(hasChanged) {
-                                lastnum.setText(lastnum.getText().toString() + result.getText().toString() + " + ");
-                                calculation.push(result.getText().toString());
+                            if (!calculation.peek().equals("+") && !hasChanged) {
                                 calculation.push("+");
-                                hasChanged = false;
+                                result.setText(result.getText() + "+");
                             } else {
-                                lastnum.setText(lastnum.getText().toString().substring(0, lastnum.getText().length()-3) + " + ");
+                                result.setText(result.getText().toString().substring(0, result.length()-1) + "+");
                                 calculation.pop();
                                 calculation.push("+");
                             }
+
+                            reference_to_last_num = result.length();
+                            hasChanged = true;
                             break;
                         case "-":
-                            if(hasChanged) {
-                                lastnum.setText(lastnum.getText().toString() + result.getText().toString() + " - ");
-                                calculation.push(result.getText().toString());
+                            if (!calculation.peek().equals("-") && !hasChanged) {
                                 calculation.push("-");
-                                hasChanged = false;
-                            }else {
-                                lastnum.setText(lastnum.getText().toString().substring(0, lastnum.getText().length()-3) + " - ");
+                                result.setText(result.getText() + "-");
+                            } else {
+                                result.setText(result.getText().toString().substring(0, result.length()-1) + "-");
                                 calculation.pop();
                                 calculation.push("-");
                             }
+
+                            reference_to_last_num = result.length();
+                            hasChanged = true;
                             break;
                         case "*":
-                            if (hasChanged) {
-                                lastnum.setText(lastnum.getText().toString() + result.getText().toString() + " * ");
-                                calculation.push(result.getText().toString());
+                            if (!calculation.peek().equals("*") && !hasChanged) {
                                 calculation.push("*");
-                                hasChanged = false;
+                                result.setText(result.getText() + "*");
                             } else {
-                                lastnum.setText(lastnum.getText().toString().substring(0, lastnum.getText().length()-3) + " * ");
+                                result.setText(result.getText().toString().substring(0, result.length()-1) + "*");
                                 calculation.pop();
                                 calculation.push("*");
                             }
+
+                            reference_to_last_num = result.length();
+                            hasChanged = true;
                             break;
                         case "/":
-                            if (hasChanged) {
-                                lastnum.setText(lastnum.getText().toString() + result.getText().toString() + " / ");
-                                calculation.push(result.getText().toString());
+                            if (!calculation.peek().equals("/") && !hasChanged) {
                                 calculation.push("/");
-                                hasChanged = false;
+                                result.setText(result.getText() + "/");
                             } else {
-                                lastnum.setText(lastnum.getText().toString().substring(0, lastnum.getText().length()-3) + " / ");
+                                result.setText(result.getText().toString().substring(0, result.length()-1) + "/");
                                 calculation.pop();
                                 calculation.push("/");
                             }
-                            break;
 
+                            reference_to_last_num = result.length();
+                            hasChanged = true;
+                            break;
                     }
+
+                    System.out.println(calculation.peek().toString());
                 }
             });
         }
 
+        equals.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String res = calculateMDAS(((Stack<String>)calculation.clone()));
 
+                if (isNotInteger(res)) {
+                    lastnum.setText("= " + Float.parseFloat(res));
+                } else {
+                    lastnum.setText("= " + ((int) Float.parseFloat(res)));
+                }
+
+                result.setText("");
+                calculation = new Stack<>();
+                hasChanged = true;
+                reference_to_last_num = 0;
+            }
+        });
+    }
+
+    public boolean isNotInteger(String s) {
+        float num = Float.parseFloat(s);
+
+        return num - Math.floor(num) > 0;
+    }
+
+    public String calculateSequence(Stack s) {
+        String result = "";
+
+        //reverse stack
+        Stack<String> final_stack = new Stack<>();
+        while (!s.isEmpty()) {
+            final_stack.push(s.pop().toString());
+        }
+        System.out.println("stack size: " + final_stack.size());
+        System.out.println("checking stack top before solving: " + final_stack.peek());
+        //solve stack to solve sequentially
+        while(!(final_stack.size() == 1)) {
+            float initial_num = Float.parseFloat(final_stack.pop());
+            float second_num, res;
+            switch(final_stack.pop()) { /*solving for the operator*/
+                case "+":
+                    second_num = Float.parseFloat(final_stack.pop());
+                    res = initial_num + second_num;
+                    final_stack.push(String.valueOf(res));
+                    break;
+                case "-":
+                    second_num = Float.parseFloat(final_stack.pop());
+                    res = initial_num - second_num;
+                    final_stack.push(String.valueOf(res));
+                    break;
+                case "*":
+                    second_num = Float.parseFloat(final_stack.pop());
+                    res = initial_num * second_num;
+                    final_stack.push(String.valueOf(res));
+                    break;
+                case "/":
+                    second_num = Float.parseFloat(final_stack.pop());
+                    res = initial_num / second_num;
+                    final_stack.push(String.valueOf(res));
+                    break;
+            }
+        }
+        //final num is result
+        result = final_stack.pop();
+        return result;
+    }
+
+    public String calculateMDAS(Stack s) {
+        String result = "";
+
+        //make a stack to use for the final stack
+        Stack<String> secondstack = new Stack<>();
+
+        //run through the s stack: push nums by default, evaluate any operator following MDAS by popping from both stacks before pushing again
+        while (!s.isEmpty()) {
+            float first_num;
+            float second_num, res;
+            switch (s.peek().toString()){
+                case "*":
+                    s.pop();
+                    first_num = Float.parseFloat(s.pop().toString());
+                    second_num = Float.parseFloat(secondstack.pop());
+                    res = first_num * second_num;
+                    secondstack.push(String.valueOf(res));
+                    break;
+                default:
+                   secondstack.push(s.pop().toString());
+            }
+        }
+
+        s = stackReverser(((Stack<String>) secondstack.clone())); //reverse the stack before parsing another operator
+        secondstack = new Stack<>();
+
+        while (!s.isEmpty()) {
+            float first_num;
+            float second_num, res;
+            switch (s.peek().toString()){
+                case "/":
+                    s.pop();
+                    first_num = Float.parseFloat(s.pop().toString());
+                    second_num = Float.parseFloat(secondstack.pop());
+                    res = first_num / second_num;
+                    secondstack.push(String.valueOf(res));
+                    break;
+                default:
+                    secondstack.push(s.pop().toString());
+            }
+        }
+
+        s = stackReverser(((Stack<String>) secondstack.clone())); //reverse the stack before parsing another operator
+        secondstack = new Stack<>();
+
+        while (!s.isEmpty()) {
+            float first_num;
+            float second_num, res;
+            switch (s.peek().toString()){
+                case "+":
+                    s.pop();
+                    first_num = Float.parseFloat(s.pop().toString());
+                    second_num = Float.parseFloat(secondstack.pop());
+                    res = first_num + second_num;
+                    secondstack.push(String.valueOf(res));
+                    break;
+                default:
+                    secondstack.push(s.pop().toString());
+            }
+        }
+
+        s = stackReverser(((Stack<String>) secondstack.clone())); //reverse the stack before parsing another operator
+        secondstack = new Stack<>();
+
+        while (!s.isEmpty()) {
+            float first_num;
+            float second_num, res;
+            switch (s.peek().toString()){
+                case "-":
+                    s.pop();
+                    first_num = Float.parseFloat(s.pop().toString());
+                    second_num = Float.parseFloat(secondstack.pop());
+                    res = first_num - second_num;
+                    secondstack.push(String.valueOf(res));
+                    break;
+                default:
+                    secondstack.push(s.pop().toString());
+            }
+        }
+
+        result = secondstack.pop();
+        return result;
+    }
+
+    public Stack stackReverser(Stack s) {
+        Stack<String> reversed = new Stack<>();
+
+        while (!s.isEmpty()) {
+            reversed.push(s.pop().toString());
+        }
+        return reversed;
     }
 }

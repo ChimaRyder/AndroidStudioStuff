@@ -17,12 +17,6 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/lastnum_textview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAlignment="viewEnd" />
-
-        <TextView
             android:id="@+id/result_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -30,6 +24,12 @@
             android:text="0"
             android:textAlignment="viewEnd"
             android:textSize="34sp" />
+
+        <TextView
+            android:id="@+id/lastnum_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="viewEnd" />
 
         <LinearLayout
             android:id="@+id/calc_buttons_layout"

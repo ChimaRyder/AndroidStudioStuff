@@ -97,10 +97,14 @@ public class Calculator extends AppCompatActivity {
                     String res = calculateSequence(((Stack<String>)calculation.clone()));
 
 
-                    if (isNotInteger(res)) {
-                        lastnum.setText("= " + Float.parseFloat(res));
-                    } else {
-                        lastnum.setText("= " + ((int) Float.parseFloat(res)));
+                    try {
+                        if (isNotInteger(res)) {
+                            lastnum.setText("= " + Float.parseFloat(res));
+                        } else {
+                            lastnum.setText("= " + ((int) Float.parseFloat(res)));
+                        }
+                    } catch (NumberFormatException ne) {
+                        lastnum.setText(res);
                     }
                 }
             });
@@ -113,8 +117,23 @@ public class Calculator extends AppCompatActivity {
                 Button y = (Button) view;
                 String p = y.getText().toString();
 
-                if (!result.getText().toString().substring(reference_to_last_num, result.length()).contains(".")){
+                if (calculation.isEmpty()) {
+                    result.setText("0.");
+                    calculation.push("0");
+                    System.out.println(calculation.isEmpty());
+                    System.out.println(calculation.peek().toString());
+                } else if (!result.getText().toString().substring(reference_to_last_num, result.length()).contains(".") && calculation.size()%2 != 0){
                     result.setText(result.getText() + p);
+                } else if (result.getText().charAt(result.length()-1) == '.') {
+                    result.setText(result.getText().toString().substring(0, result.length()-1));
+
+                    System.out.println(calculation.isEmpty());
+                    System.out.println(calculation.peek().toString());
+
+                    if (calculation.peek().toString() == "0") {
+                        calculation.pop();
+                        hasChanged = false;
+                    }
                 }
             }
         });
@@ -143,60 +162,70 @@ public class Calculator extends AppCompatActivity {
                     System.out.println(calculation.isEmpty());
                     switch(operator) {
                         case "+":
-                            if (!calculation.peek().equals("+") && !hasChanged) {
-                                calculation.push("+");
-                                result.setText(result.getText() + "+");
-                            } else {
-                                result.setText(result.getText().toString().substring(0, result.length()-1) + "+");
-                                calculation.pop();
-                                calculation.push("+");
-                            }
+                            if (!(result.getText().toString().charAt(result.length()-1) == '.') && !calculation.isEmpty()) {
+                                if (!calculation.peek().equals("+") && !hasChanged) {
+                                    calculation.push("+");
+                                    result.setText(result.getText() + "+");
+                                } else {
+                                    result.setText(result.getText().toString().substring(0, result.length()-1) + "+");
+                                    calculation.pop();
+                                    calculation.push("+");
+                                }
 
-                            reference_to_last_num = result.length();
-                            hasChanged = true;
+                                reference_to_last_num = result.length();
+                                hasChanged = true;
+                            }
                             break;
                         case "-":
-                            if (!calculation.peek().equals("-") && !hasChanged) {
-                                calculation.push("-");
-                                result.setText(result.getText() + "-");
-                            } else {
-                                result.setText(result.getText().toString().substring(0, result.length()-1) + "-");
-                                calculation.pop();
-                                calculation.push("-");
-                            }
+                            if (!(result.getText().toString().charAt(result.length()-1) == '.') && !calculation.isEmpty()) {
+                                if (!calculation.peek().equals("-") && !hasChanged) {
+                                    calculation.push("-");
+                                    result.setText(result.getText() + "-");
+                                } else {
+                                    result.setText(result.getText().toString().substring(0, result.length()-1) + "-");
+                                    calculation.pop();
+                                    calculation.push("-");
+                                }
 
-                            reference_to_last_num = result.length();
-                            hasChanged = true;
+                                reference_to_last_num = result.length();
+                                hasChanged = true;
+                            }
                             break;
                         case "*":
-                            if (!calculation.peek().equals("*") && !hasChanged) {
-                                calculation.push("*");
-                                result.setText(result.getText() + "*");
-                            } else {
-                                result.setText(result.getText().toString().substring(0, result.length()-1) + "*");
-                                calculation.pop();
-                                calculation.push("*");
-                            }
+                            if (!(result.getText().toString().charAt(result.length()-1) == '.') && !calculation.isEmpty()) {
+                                if (!calculation.peek().equals("*") && !hasChanged) {
+                                    calculation.push("*");
+                                    result.setText(result.getText() + "*");
+                                } else {
+                                    result.setText(result.getText().toString().substring(0, result.length()-1) + "*");
+                                    calculation.pop();
+                                    calculation.push("*");
+                                }
 
-                            reference_to_last_num = result.length();
-                            hasChanged = true;
+                                reference_to_last_num = result.length();
+                                hasChanged = true;
+                            }
                             break;
                         case "/":
-                            if (!calculation.peek().equals("/") && !hasChanged) {
-                                calculation.push("/");
-                                result.setText(result.getText() + "/");
-                            } else {
-                                result.setText(result.getText().toString().substring(0, result.length()-1) + "/");
-                                calculation.pop();
-                                calculation.push("/");
-                            }
+                            if (!(result.getText().toString().charAt(result.length()-1) == '.') && !calculation.isEmpty()) {
+                                if (!calculation.peek().equals("/") && !hasChanged) {
+                                    calculation.push("/");
+                                    result.setText(result.getText() + "/");
+                                } else {
+                                    result.setText(result.getText().toString().substring(0, result.length()-1) + "/");
+                                    calculation.pop();
+                                    calculation.push("/");
+                                }
 
-                            reference_to_last_num = result.length();
-                            hasChanged = true;
+                                reference_to_last_num = result.length();
+                                hasChanged = true;
+                            }
                             break;
                     }
 
-                    System.out.println(calculation.peek().toString());
+                    if(!calculation.isEmpty()) {
+                        System.out.println(calculation.peek().toString());
+                    }
                 }
             });
         }
@@ -204,18 +233,24 @@ public class Calculator extends AppCompatActivity {
         equals.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String res = calculateMDAS(((Stack<String>)calculation.clone()));
+                if (!(result.getText().toString().charAt(result.length()-1) == '.') && calculation.size()%2 != 0) {
+                    String res = calculateMDAS(((Stack<String>)calculation.clone()));
 
-                if (isNotInteger(res)) {
-                    lastnum.setText("= " + Float.parseFloat(res));
-                } else {
-                    lastnum.setText("= " + ((int) Float.parseFloat(res)));
+                    try {
+                        if (isNotInteger(res)) {
+                            lastnum.setText("= " + Float.parseFloat(res));
+                        } else {
+                            lastnum.setText("= " + ((int) Float.parseFloat(res)));
+                        }
+                    } catch (NumberFormatException ne) {
+                        lastnum.setText(res);
+                    }
+
+                    result.setText("0");
+                    calculation = new Stack<>();
+                    hasChanged = false;
+                    reference_to_last_num = 0;
                 }
-
-                result.setText("");
-                calculation = new Stack<>();
-                hasChanged = true;
-                reference_to_last_num = 0;
             }
         });
     }
@@ -259,6 +294,11 @@ public class Calculator extends AppCompatActivity {
                 case "/":
                     second_num = Float.parseFloat(final_stack.pop());
                     res = initial_num / second_num;
+
+                    if (second_num == 0) {
+                        return "Error: cannot divide by 0.";
+                    }
+
                     final_stack.push(String.valueOf(res));
                     break;
             }
@@ -302,6 +342,11 @@ public class Calculator extends AppCompatActivity {
                     s.pop();
                     first_num = Float.parseFloat(s.pop().toString());
                     second_num = Float.parseFloat(secondstack.pop());
+
+                    if (second_num == 0) {
+                        return "Error: cannot divide by 0.";
+                    }
+
                     res = first_num / second_num;
                     secondstack.push(String.valueOf(res));
                     break;

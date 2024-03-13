@@ -83,7 +83,11 @@ public class Calculator extends AppCompatActivity {
                     if (result.getText().equals("0")){
                         result.setText(num);
                     } else {
-                        result.setText(result.getText() + num);
+                        if (result.getText().toString().substring(reference_to_last_num, result.length()).equals("0") && !hasChanged) {
+                            result.setText(result.getText().toString().substring(0, reference_to_last_num) + num);
+                        } else {
+                            result.setText(result.getText() + num);
+                        }
                     }
 
                     if (calculation.isEmpty() || hasChanged) {
@@ -122,7 +126,13 @@ public class Calculator extends AppCompatActivity {
                     calculation.push("0");
                     System.out.println(calculation.isEmpty());
                     System.out.println(calculation.peek().toString());
-                } else if (!result.getText().toString().substring(reference_to_last_num, result.length()).contains(".") && calculation.size()%2 != 0){
+                } else if (hasChanged) {
+                    result.setText(result.getText() + "0.");
+                    calculation.push("0");
+                    System.out.println(calculation.isEmpty());
+                    System.out.println(calculation.peek().toString());
+                    hasChanged = false;
+                }else if (!result.getText().toString().substring(reference_to_last_num, result.length()).contains(".") && calculation.size()%2 != 0){
                     result.setText(result.getText() + p);
                 } else if (result.getText().charAt(result.length()-1) == '.') {
                     result.setText(result.getText().toString().substring(0, result.length()-1));
@@ -130,10 +140,10 @@ public class Calculator extends AppCompatActivity {
                     System.out.println(calculation.isEmpty());
                     System.out.println(calculation.peek().toString());
 
-                    if (calculation.peek().toString() == "0") {
-                        calculation.pop();
-                        hasChanged = false;
-                    }
+//                    if (calculation.peek().toString() == "0") {
+//                        calculation.pop();
+//                        hasChanged = false;
+//                    }
                 }
             }
         });
@@ -326,18 +336,6 @@ public class Calculator extends AppCompatActivity {
                     res = first_num * second_num;
                     secondstack.push(String.valueOf(res));
                     break;
-                default:
-                   secondstack.push(s.pop().toString());
-            }
-        }
-
-        s = stackReverser(((Stack<String>) secondstack.clone())); //reverse the stack before parsing another operator
-        secondstack = new Stack<>();
-
-        while (!s.isEmpty()) {
-            float first_num;
-            float second_num, res;
-            switch (s.peek().toString()){
                 case "/":
                     s.pop();
                     first_num = Float.parseFloat(s.pop().toString());
@@ -351,7 +349,7 @@ public class Calculator extends AppCompatActivity {
                     secondstack.push(String.valueOf(res));
                     break;
                 default:
-                    secondstack.push(s.pop().toString());
+                   secondstack.push(s.pop().toString());
             }
         }
 
@@ -369,18 +367,6 @@ public class Calculator extends AppCompatActivity {
                     res = first_num + second_num;
                     secondstack.push(String.valueOf(res));
                     break;
-                default:
-                    secondstack.push(s.pop().toString());
-            }
-        }
-
-        s = stackReverser(((Stack<String>) secondstack.clone())); //reverse the stack before parsing another operator
-        secondstack = new Stack<>();
-
-        while (!s.isEmpty()) {
-            float first_num;
-            float second_num, res;
-            switch (s.peek().toString()){
                 case "-":
                     s.pop();
                     first_num = Float.parseFloat(s.pop().toString());

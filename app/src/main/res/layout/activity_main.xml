@@ -46,9 +46,19 @@
             android:layout_height="33dp" />
 
         <Button
-            android:id="@+id/button4"
+            android:id="@+id/btncolormatch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Button" />
+            android:text="Color Match" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="33dp" />
+
+        <Button
+            android:id="@+id/btnconnectthree"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Connect Three" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

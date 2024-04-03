@@ -12,6 +12,9 @@ public class MainActivity extends AppCompatActivity {
     Button buttonExercise;
     Button calcbutton;
 
+    Button colormatch;
+
+    Button connectthree;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,5 +53,32 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        colormatch = (Button) findViewById(R.id.btncolormatch);
+
+        colormatch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(
+                        MainActivity.this,
+                        ColorMatch.class);
+                startActivity(intent);
+            }
+        });
+
+        connectthree = (Button) findViewById(R.id.btnconnectthree);
+
+        connectthree.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(
+                        MainActivity.this,
+                        ConnectThree.class
+                );
+                startActivity(intent);
+            }
+        });
+
+
     }
 }

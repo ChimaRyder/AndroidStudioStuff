@@ -180,7 +180,7 @@ public class ConnectThree extends AppCompatActivity {
     }
 
     private int coinChecker(int row, int col, int player_coin, String direction) {
-       if (row > 4 || col < 0 || col > 4) {
+       if (row > 4 || row < 0 || col < 0 || col > 4) {
            return 0;
        } else {
            switch(direction) {
@@ -216,13 +216,13 @@ public class ConnectThree extends AppCompatActivity {
                    }
                case "diagonal-up-left":
                    if (currentstate[row][col] == player_coin) {
-                       return coinChecker(row-1, col-1, player_coin, "diagonal-left") + 1;
+                       return coinChecker(row-1, col-1, player_coin, "diagonal-up-left") + 1;
                    } else {
                        return 0;
                    }
                case "diagonal-up-right":
                    if (currentstate[row][col] == player_coin) {
-                       return coinChecker(row-1, col+1, player_coin, "diagonal-right") + 1;
+                       return coinChecker(row-1, col+1, player_coin, "diagonal-up-right") + 1;
                    } else {
                        return 0;
                    }

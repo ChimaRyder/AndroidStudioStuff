@@ -103,7 +103,7 @@ public class ConnectThree extends AppCompatActivity {
                   currentstate[target][ccol] = player_coin;
 
                   //recursively find any strings of coins from the dropped coin
-                  for (int i = 0; i < 5; i++) {
+                  for (int i = 0; i < 7; i++) {
                       String direction = "";
                       switch (i) {
                           case 0:
@@ -120,6 +120,12 @@ public class ConnectThree extends AppCompatActivity {
                               break;
                           case 4:
                               direction = "diagonal-right";
+                              break;
+                          case 5:
+                              direction = "diagonal-up-left";
+                              break;
+                          case 6:
+                              direction = "diagonal-up-right";
                               break;
                       }
 
@@ -205,6 +211,18 @@ public class ConnectThree extends AppCompatActivity {
                case "diagonal-right":
                    if (currentstate[row][col] == player_coin) {
                        return coinChecker(row+1, col+1, player_coin, "diagonal-right") + 1;
+                   } else {
+                       return 0;
+                   }
+               case "diagonal-up-left":
+                   if (currentstate[row][col] == player_coin) {
+                       return coinChecker(row-1, col-1, player_coin, "diagonal-left") + 1;
+                   } else {
+                       return 0;
+                   }
+               case "diagonal-up-right":
+                   if (currentstate[row][col] == player_coin) {
+                       return coinChecker(row-1, col+1, player_coin, "diagonal-right") + 1;
                    } else {
                        return 0;
                    }

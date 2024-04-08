@@ -15,13 +15,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="16dp" />
+
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/player"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="PLAYER 1"
             android:textAlignment="center"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
         <Space
             android:layout_width="match_parent"

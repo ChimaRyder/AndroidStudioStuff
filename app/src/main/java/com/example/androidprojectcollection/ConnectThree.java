@@ -1,10 +1,15 @@
 package com.example.androidprojectcollection;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -44,13 +49,22 @@ public class ConnectThree extends AppCompatActivity {
     Button btn5_4;
     Button btn5_5;
 
-    int current_col;
-    int[][] currentstate = new int[5][5];
+    Button reset;
+
+    static int[][] currentstate = new int[5][5];
+    int player_coin = 1;
+    int playerColor = android.R.color.holo_purple;
+
+    TextView current_player;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_connect_three);
+        ActionBar b = getSupportActionBar();
+        assert b != null;
+        b.hide();
 
         for (int row = 0; row < 5; row++) {
             for (int col = 0; col < 5; col++) {
@@ -59,7 +73,7 @@ public class ConnectThree extends AppCompatActivity {
             }
         }
 
-        int[] currentsizes = new int[5];
+       int[] currentsizes = new int[5];
 
        for (int i = 0 ; i < 5; i++) {
            for (int j = 0; j < 5; j++) {
@@ -67,19 +81,136 @@ public class ConnectThree extends AppCompatActivity {
            }
        }
 
+       reset = (Button) findViewById(R.id.btn_reset);
+
+       current_player = (TextView) findViewById(R.id.player);
+
         for (int i = 0; i < 5; i++) {
-            current_col = i;
+            int ccol = i;
            buttons[0][i].setOnClickListener(new View.OnClickListener() {
-               int col = current_col;
+               int col = ccol;
                @Override
                public void onClick(View view) {
                   int target = 4;
-                  while (currentstate[target][current_col] == 1) {
+                  while (currentstate[target][ccol] != 0) {
+                      if (target == 0) {
+                          return;
+                      }
                       target--;
                   }
-                  buttons[target][current_col].setBackgroundColor(android.R.color.black);
+
+                  buttons[target][ccol].setBackgroundColor(getResources().getColor(playerColor));
+                  currentstate[target][ccol] = player_coin;
+
+                  //recursively find any strings of coins from the dropped coin
+                  for (int i = 0; i < 5; i++) {
+                      String direction = "";
+                      switch (i) {
+                          case 0:
+                              direction = "down";
+                              break;
+                          case 1:
+                              direction = "left";
+                              break;
+                          case 2:
+                              direction = "right";
+                              break;
+                          case 3:
+                              direction = "diagonal-left";
+                              break;
+                          case 4:
+                              direction = "diagonal-right";
+                              break;
+                      }
+
+                      if (coinChecker(target, ccol, player_coin, direction) == 3) {
+                          String WinMessage = "PLAYER " + player_coin + " WINS!";
+                          Toast.makeText(ConnectThree.this, WinMessage, Toast.LENGTH_SHORT).show();
+                          System.out.println("Winner: " + player_coin + "\n direction: " + direction);
+                          current_player.setText(WinMessage);
+
+                          for (int g = 0; g < 5; g++) {
+                              buttons[0][g].setClickable(false);
+                          }
+                      }
+                  }
+
+                  //switch the player turn
+                   if (player_coin == 1) {
+                       player_coin = 2;
+                       playerColor = android.R.color.holo_orange_light;
+                   } else {
+                       player_coin = 1;
+                       playerColor = android.R.color.holo_purple;
+                   }
+
+                   String player_turn = "PLAYER " + player_coin;
+                   current_player.setText(player_turn);
+
                }
            });
         }
+
+        reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                for (int i = 0; i < 5; i++) {
+                    for (int j = 0; j < 5; j++) {
+                        buttons[i][j].setBackgroundColor(getResources().getColor(android.R.color.white));
+                        currentstate[i][j] = 0;
+                    }
+                }
+
+                for (int k = 0; k < 5; k++) {
+                    buttons[0][k].setClickable(true);
+                }
+
+                player_coin = 1;
+                playerColor = android.R.color.holo_purple;
+                String playerText = "PLAYER " + player_coin;
+                current_player.setText(playerText);
+            }
+        });
+    }
+
+    private int coinChecker(int row, int col, int player_coin, String direction) {
+       if (row > 4 || col < 0 || col > 4) {
+           return 0;
+       } else {
+           switch(direction) {
+               case "down":
+                   if (currentstate[row][col] == player_coin) {
+                       return coinChecker(row+1, col, player_coin, "down") + 1;
+                   } else {
+                       return 0;
+                   }
+               case "left":
+                   if (currentstate[row][col] == player_coin) {
+                       return coinChecker(row, col-1, player_coin, "left") + 1;
+                   } else {
+                       return 0;
+                   }
+               case "right":
+                   if (currentstate[row][col] == player_coin) {
+                       return coinChecker(row, col+1, player_coin, "right") + 1;
+                   } else {
+                       return 0;
+                   }
+               case "diagonal-left":
+                   if (currentstate[row][col] == player_coin) {
+                       return coinChecker(row+1, col-1, player_coin, "diagonal-left") + 1;
+                   } else {
+                       return 0;
+                   }
+               case "diagonal-right":
+                   if (currentstate[row][col] == player_coin) {
+                       return coinChecker(row+1, col+1, player_coin, "diagonal-right") + 1;
+                   } else {
+                       return 0;
+                   }
+           }
+       }
+
+       return -1;
     }
 }

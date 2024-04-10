@@ -54,6 +54,7 @@ public class ConnectThree extends AppCompatActivity {
     static int[][] currentstate = new int[5][5];
     int player_coin = 1;
     int playerColor = android.R.color.holo_purple;
+    boolean hasWon = false;
 
     TextView current_player;
 
@@ -91,68 +92,79 @@ public class ConnectThree extends AppCompatActivity {
                int col = ccol;
                @Override
                public void onClick(View view) {
-                  int target = 4;
-                  while (currentstate[target][ccol] != 0) {
-                      if (target == 0) {
-                          return;
-                      }
-                      target--;
-                  }
-
-                  buttons[target][ccol].setBackgroundColor(getResources().getColor(playerColor));
-                  currentstate[target][ccol] = player_coin;
-
-                  //recursively find any strings of coins from the dropped coin
-                  for (int i = 0; i < 7; i++) {
-                      String direction = "";
-                      switch (i) {
-                          case 0:
-                              direction = "down";
-                              break;
-                          case 1:
-                              direction = "left";
-                              break;
-                          case 2:
-                              direction = "right";
-                              break;
-                          case 3:
-                              direction = "diagonal-left";
-                              break;
-                          case 4:
-                              direction = "diagonal-right";
-                              break;
-                          case 5:
-                              direction = "diagonal-up-left";
-                              break;
-                          case 6:
-                              direction = "diagonal-up-right";
-                              break;
-                      }
-
-                      if (coinChecker(target, ccol, player_coin, direction) == 3) {
-                          String WinMessage = "PLAYER " + player_coin + " WINS!";
-                          Toast.makeText(ConnectThree.this, WinMessage, Toast.LENGTH_SHORT).show();
-                          System.out.println("Winner: " + player_coin + "\n direction: " + direction);
-                          current_player.setText(WinMessage);
-
-                          for (int g = 0; g < 5; g++) {
-                              buttons[0][g].setClickable(false);
-                          }
-                      }
-                  }
-
-                  //switch the player turn
-                   if (player_coin == 1) {
-                       player_coin = 2;
-                       playerColor = android.R.color.holo_orange_light;
-                   } else {
-                       player_coin = 1;
-                       playerColor = android.R.color.holo_purple;
+                   int target = 4;
+                   while (currentstate[target][ccol] != 0) {
+                       if (target == 0) {
+                           return;
+                       }
+                       target--;
                    }
 
-                   String player_turn = "PLAYER " + player_coin;
-                   current_player.setText(player_turn);
+                   buttons[target][ccol].setBackgroundColor(getResources().getColor(playerColor));
+                   currentstate[target][ccol] = player_coin;
 
+                   //recursively find any strings of coins from the dropped coin
+                   for (int i = 0; i < 10; i++) {
+                       String direction = "";
+                       switch (i) {
+                           case 0:
+                               direction = "down";
+                               break;
+                           case 1:
+                               direction = "left";
+                               break;
+                           case 2:
+                               direction = "right";
+                               break;
+                           case 3:
+                               direction = "diagonal-left";
+                               break;
+                           case 4:
+                               direction = "diagonal-right";
+                               break;
+                           case 5:
+                               direction = "diagonal-up-left";
+                               break;
+                           case 6:
+                               direction = "diagonal-up-right";
+                               break;
+                           case 7:
+                               direction = "middle-across";
+                               break;
+                           case 8:
+                               direction = "middle-dleft";
+                               break;
+                           case 9:
+                               direction = "middle-dright";
+                               break;
+                       }
+
+                       if (coinChecker(target, ccol, player_coin, direction) == 3) {
+                           String WinMessage = "PLAYER " + player_coin + " WINS!";
+                           hasWon = true;
+                           Toast.makeText(ConnectThree.this, WinMessage, Toast.LENGTH_SHORT).show();
+                           System.out.println("Winner: " + player_coin + "\n direction: " + direction);
+                           current_player.setText(WinMessage);
+
+                           for (int g = 0; g < 5; g++) {
+                               buttons[0][g].setClickable(false);
+                           }
+                       }
+                   }
+
+                   //switch the player turn
+                   if (!hasWon) {
+                       if (player_coin == 1) {
+                           player_coin = 2;
+                           playerColor = android.R.color.holo_orange_light;
+                       } else {
+                           player_coin = 1;
+                           playerColor = android.R.color.holo_purple;
+                       }
+
+                       String player_turn = "PLAYER " + player_coin;
+                       current_player.setText(player_turn);
+                   }
                }
            });
         }
@@ -171,6 +183,7 @@ public class ConnectThree extends AppCompatActivity {
                     buttons[0][k].setClickable(true);
                 }
 
+                hasWon = false;
                 player_coin = 1;
                 playerColor = android.R.color.holo_purple;
                 String playerText = "PLAYER " + player_coin;
@@ -223,6 +236,36 @@ public class ConnectThree extends AppCompatActivity {
                case "diagonal-up-right":
                    if (currentstate[row][col] == player_coin) {
                        return coinChecker(row-1, col+1, player_coin, "diagonal-up-right") + 1;
+                   } else {
+                       return 0;
+                   }
+               case "middle-across":
+                   if (!(col-1 < 0) && !(col+1 > 4) ) {
+                       if (currentstate[row][col - 1] == player_coin && currentstate[row][col + 1] == player_coin) {
+                           return 3;
+                       } else {
+                           return 0;
+                       }
+                   } else {
+                       return 0;
+                   }
+               case "middle-dleft":
+                   if (!(col-1 < 0) && !(col+1 > 4) && !(row-1 < 0) && !(row+1 > 4)) {
+                       if (currentstate[row-1][col-1] == player_coin && currentstate[row+1][col+1] == player_coin) {
+                           return 3;
+                       } else {
+                           return 0;
+                       }
+                   } else {
+                       return 0;
+                   }
+               case "middle-dright":
+                   if (!(col-1 < 0) && !(col+1 > 4) && !(row-1 < 0) && !(row+1 > 4)) {
+                       if (currentstate[row-1][col+1] == player_coin && currentstate[row+1][col-1] == player_coin) {
+                           return 3;
+                       } else {
+                           return 0;
+                       }
                    } else {
                        return 0;
                    }

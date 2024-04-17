@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(
                         MainActivity.this,
-                        PassingIntents.class
+                        PassingIntentsExercise.class
                 );
                 startActivity(intent);
             }

@@ -7,8 +7,8 @@
     tools:context=".MainActivity">
 
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -18,47 +18,65 @@
         <Button
             android:id="@+id/btnLayoutExercise"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
             android:text="Layout Exercise" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="33dp" />
 
         <Button
             android:id="@+id/button2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
             android:text="Button Exercise" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="33dp" />
 
         <Button
             android:id="@+id/button3"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
             android:text="CalculatorExercise" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="33dp" />
 
         <Button
             android:id="@+id/btncolormatch"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Color Match" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="33dp" />
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:text="Midterm" />
 
         <Button
             android:id="@+id/btnconnectthree"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
             android:text="Connect Three" />
+
+        <Button
+            android:id="@+id/btn_intents"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:text="Passing Intents" />
+
+        <Button
+            android:id="@+id/btn_fragments"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:text="Fragments" />
+
+        <Button
+            android:id="@+id/btn_menus"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:text="Menus" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

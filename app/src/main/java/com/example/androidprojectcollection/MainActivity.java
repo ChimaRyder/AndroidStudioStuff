@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     Button colormatch;
 
     Button connectthree;
+    Button intentbtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +75,18 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(
                         MainActivity.this,
                         ConnectThree.class
+                );
+                startActivity(intent);
+            }
+        });
+
+        intentbtn = (Button) findViewById(R.id.btn_intents);
+        intentbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(
+                        MainActivity.this,
+                        PassingIntents.class
                 );
                 startActivity(intent);
             }

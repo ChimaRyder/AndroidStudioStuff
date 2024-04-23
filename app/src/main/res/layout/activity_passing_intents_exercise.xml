@@ -57,7 +57,7 @@
                         android:orientation="horizontal">
 
                         <EditText
-                            android:id="@+id/editTextTextPersonName5"
+                            android:id="@+id/tfFName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -69,7 +69,7 @@
                             android:textSize="14sp" />
 
                         <EditText
-                            android:id="@+id/editTextTextPersonName6"
+                            android:id="@+id/tfLName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -103,21 +103,21 @@
                         android:orientation="horizontal">
 
                         <RadioButton
-                            android:id="@+id/radioButton9"
+                            android:id="@+id/rbMale"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:text="Male" />
 
                         <RadioButton
-                            android:id="@+id/radioButton10"
+                            android:id="@+id/rbFemale"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:text="Female" />
 
                         <RadioButton
-                            android:id="@+id/radioButton11"
+                            android:id="@+id/rbOthers"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
@@ -142,14 +142,15 @@
                         android:textStyle="bold" />
 
                     <EditText
-                        android:id="@+id/editTextDate2"
+                        android:id="@+id/tfBirthdate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:autoSizeTextType="uniform"
+                        android:editable="false"
                         android:ems="10"
                         android:hint="MM/DD/YYYY"
-                        android:inputType="date"
+                        android:inputType="none"
                         android:textSize="14sp" />
                 </LinearLayout>
 
@@ -169,7 +170,7 @@
                         android:textStyle="bold" />
 
                     <EditText
-                        android:id="@+id/editTextPhone"
+                        android:id="@+id/tfPhone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -196,7 +197,7 @@
                         android:textStyle="bold" />
 
                     <EditText
-                        android:id="@+id/editTextEmail"
+                        android:id="@+id/tfEmail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -223,7 +224,7 @@
                         android:textStyle="bold" />
 
                     <EditText
-                        android:id="@+id/editTextTextPersonName9"
+                        android:id="@+id/tfAddress"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -231,31 +232,6 @@
                         android:hint="e.g. City of Naga, Cebu"
                         android:inputType="textPersonName"
                         android:textColor="#000000"
-                        android:textSize="14sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/lblProgram"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Program"
-                        android:textColor="#14213D"
-                        android:textStyle="bold" />
-
-                    <EditText
-                        android:id="@+id/editTextTextPersonName8"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:autoSizeTextType="uniform"
-                        android:ems="10"
-                        android:hint="e.g. BS Computer Science"
-                        android:inputType="textPersonName"
                         android:textSize="14sp" />
                 </LinearLayout>
 
@@ -274,12 +250,37 @@
                         android:textStyle="bold" />
 
                     <EditText
-                        android:id="@+id/editTextTextPersonName7"
+                        android:id="@+id/tfDepartment"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:autoSizeTextType="uniform"
                         android:ems="10"
                         android:hint="e.g. College of Computer Studies"
+                        android:inputType="textPersonName"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/lblProgram"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Program"
+                        android:textColor="#14213D"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/tfProgram"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:autoSizeTextType="uniform"
+                        android:ems="10"
+                        android:hint="e.g. BS Computer Science"
                         android:inputType="textPersonName"
                         android:textSize="14sp" />
                 </LinearLayout>
@@ -352,7 +353,7 @@
                     android:orientation="horizontal">
 
                     <Button
-                        android:id="@+id/button5"
+                        android:id="@+id/btnClear"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
@@ -360,7 +361,7 @@
                         android:text="Clear" />
 
                     <Button
-                        android:id="@+id/button6"
+                        android:id="@+id/btnSubmit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
@@ -372,4 +373,5 @@
         </ScrollView>
 
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

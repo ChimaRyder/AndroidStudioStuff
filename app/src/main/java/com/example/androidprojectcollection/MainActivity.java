@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
 
     Button connectthree;
     Button intentbtn;
+    Button menubtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +93,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        menubtn = (Button) findViewById(R.id.btn_menus);
+        menubtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(
+                        MainActivity.this,
+                        MenuExercise.class
+                );
+                startActivity(intent);
+            }
+        });
 
     }
 }

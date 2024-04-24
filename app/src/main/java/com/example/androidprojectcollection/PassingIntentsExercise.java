@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -26,6 +27,7 @@ public class PassingIntentsExercise extends AppCompatActivity {
     private EditText PhoneNumber;
     private EditText Email;
     private EditText Address;
+    private EditText TwitterHandle;
 
     private EditText Department;
     private EditText Program;
@@ -52,6 +54,7 @@ public class PassingIntentsExercise extends AppCompatActivity {
         PhoneNumber = (EditText) findViewById(R.id.tfPhone);
         Email = (EditText) findViewById(R.id.tfEmail);
         Address = (EditText) findViewById(R.id.tfAddress);
+        TwitterHandle = (EditText) findViewById(R.id.tfTwitterHandle);
 
         Department = (EditText) findViewById(R.id.tfDepartment);
         Program = (EditText) findViewById(R.id.tfProgram);
@@ -129,6 +132,7 @@ public class PassingIntentsExercise extends AppCompatActivity {
                 String phone = PhoneNumber.getText().toString();
                 String email = Email.getText().toString();
                 String address = Address.getText().toString();
+                String twitter = TwitterHandle.getText().toString();
 
                 String dept = Department.getText().toString();
                 String program = Program.getText().toString();
@@ -141,6 +145,28 @@ public class PassingIntentsExercise extends AppCompatActivity {
                     }
                 }
 
+                //check for discrepancies
+                if (f.isEmpty() ||
+                    l.isEmpty() ||
+                    gender.isEmpty() ||
+                    birthdate.isEmpty() ||
+                    phone.isEmpty() ||
+                    email.isEmpty() ||
+                    address.isEmpty() ||
+                    twitter.isEmpty() ||
+                    dept.isEmpty() ||
+                    program.isEmpty() ||
+                    year.isEmpty()) {
+
+                    Toast.makeText(PassingIntentsExercise.this, "Please fill in all required information.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (!email.contains("@") || !twitter.contains("@")) {
+                    Toast.makeText(PassingIntentsExercise.this, "Please use valid information.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 //Make intent and put data in intent
                 Intent intent = new Intent(PassingIntentsExercise.this, PassingIntents2Exercise.class);
                 intent.putExtra("First_Name", f);
@@ -150,6 +176,7 @@ public class PassingIntentsExercise extends AppCompatActivity {
                 intent.putExtra("Phone_Number", phone);
                 intent.putExtra("Email", email);
                 intent.putExtra("Address", address);
+                intent.putExtra("Twitter_Handle", twitter);
                 intent.putExtra("Department", dept);
                 intent.putExtra("Program", program);
                 intent.putExtra("Year", year);
@@ -174,6 +201,7 @@ public class PassingIntentsExercise extends AppCompatActivity {
                 PhoneNumber.setText("");
                 Email.setText("");
                 Address.setText("");
+                TwitterHandle.setText("");
                 Department.setText("");
                 Program.setText("");
 

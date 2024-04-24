@@ -3,6 +3,7 @@ package com.example.androidprojectcollection;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -116,13 +117,15 @@ public class PassingIntentsExercise extends AppCompatActivity {
                 String f = FName.getText().toString();
                 String l = LName.getText().toString();
 
-                String gender;
+                String gender = "";
                 for (RadioButton r : genders) {
-                    if (r.isSelected()) {
-                       gender = r.toString();
+                    if (r.isChecked()) {
+                       gender = r.getText().toString();
+                       break;
                     }
                 }
 
+                String birthdate = Birthdate.getText().toString();
                 String phone = PhoneNumber.getText().toString();
                 String email = Email.getText().toString();
                 String address = Address.getText().toString();
@@ -130,14 +133,56 @@ public class PassingIntentsExercise extends AppCompatActivity {
                 String dept = Department.getText().toString();
                 String program = Program.getText().toString();
 
-                String year;
+                String year = "";
                 for (RadioButton r : years) {
-                    if (r.isSelected()) {
+                    if (r.isChecked()) {
                         year = r.getText().toString();
+                        break;
                     }
                 }
 
                 //Make intent and put data in intent
+                Intent intent = new Intent(PassingIntentsExercise.this, PassingIntents2Exercise.class);
+                intent.putExtra("First_Name", f);
+                intent.putExtra("Last_Name", l);
+                intent.putExtra("Gender", gender);
+                intent.putExtra("Birthdate", birthdate);
+                intent.putExtra("Phone_Number", phone);
+                intent.putExtra("Email", email);
+                intent.putExtra("Address", address);
+                intent.putExtra("Department", dept);
+                intent.putExtra("Program", program);
+                intent.putExtra("Year", year);
+
+                startActivity(intent);
+            }
+        });
+
+        Clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FName.setText("");
+                LName.setText("");
+
+                for (RadioButton r : genders) {
+                    if (r.isChecked()) {
+                        r.setChecked(false);
+                    }
+                }
+
+                Birthdate.setText("");
+                PhoneNumber.setText("");
+                Email.setText("");
+                Address.setText("");
+                Department.setText("");
+                Program.setText("");
+
+
+                for (RadioButton r : years) {
+                    if (r.isChecked()) {
+                        r.setChecked(false);
+                    }
+                }
             }
         });
 
